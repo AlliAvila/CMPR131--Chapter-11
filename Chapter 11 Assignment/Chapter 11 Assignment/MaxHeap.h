@@ -98,10 +98,10 @@ public:
 
     T front()
     {
-            if (empty())
+        if (empty())
                 return NULL;
             
-            return A[0];
+        return A[0];
     }
 
     void pop()
@@ -128,5 +128,6 @@ ostream& operator <<(ostream& out, const MaxHeap<T>& obj)
 }
 
 #endif //
+
 
 
