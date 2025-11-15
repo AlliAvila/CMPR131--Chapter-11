@@ -6,6 +6,7 @@
 #include "input.h"
 #include "MaxHeap.h"
 #include "MinHeap.h"
+#include <vector>
 using namespace std;
 
 void Option1();
@@ -67,6 +68,8 @@ void Option1()
 
 void Option1A()
 {
+	MinHeap<int> numbers;
+
 	do
 	{
 		system("cls");
@@ -84,12 +87,60 @@ void Option1A()
 
 		switch (inputInteger("\n\t\tOption: ", 0, 6))
 		{
-		case 1: break;
-		case 2: break;
-		case 3: break;
-		case 4: break;
-		case 5: break;
-		case 6: break;
+		case 1:
+		{
+			cout << "\n\t\tSize of the heap: " << numbers.size();
+		}
+			break;
+		case 2: 
+		{
+			if (numbers.empty() == true)
+			{
+				cout << "\n\t\tThe heap is empty.";
+			}
+			else
+			{
+				cout << "\n\t\tThe heap is not empty.";
+			}
+		}
+			break;
+		case 3: 
+		{
+			int push = inputInteger("\n\t\tEnter an integer element to push onto the heap: ");
+
+			numbers.push(push);
+		}
+			break;
+		case 4: 
+		{
+			cout << "\n\t\tThe first element of the heap: " << numbers.front();
+		}
+			break;
+		case 5: 
+		{
+			if (numbers.empty() == true)
+			{
+				cout << "ERROR: Push an integer element into the heap first.\n";
+			}
+			else 
+			{
+				numbers.pop();
+				cout << "\n\t\tThe first element of the heap has been removed.";
+			}
+		}
+			break;
+		case 6: 
+		{
+			if (numbers.empty() == true)
+			{
+				cout << "ERROR: Push an integer element into the heap first.\n";
+			}
+			else
+			{
+				cout << "\n\t\t" << numbers;
+			}
+		}
+			break;
 		case 0: return;
 		}
 		cout << "\n\n"; system("pause");
@@ -100,6 +151,8 @@ void Option1A()
 
 void Option1B()
 {
+	MaxHeap<int> numbers;
+
 	do
 	{
 		system("cls");
@@ -117,12 +170,60 @@ void Option1B()
 
 		switch (inputInteger("\n\t\tOption: ", 0, 6))
 		{
-		case 1: break;
-		case 2: break;
-		case 3: break;
-		case 4: break;
-		case 5: break;
-		case 6: break;
+		case 1:
+		{
+			cout << "\n\t\tSize of the heap: " << numbers.size();
+		}
+		break;
+		case 2:
+		{
+			if (numbers.empty() == true)
+			{
+				cout << "\n\t\tThe heap is empty.";
+			}
+			else
+			{
+				cout << "\n\t\tThe heap is not empty.";
+			}
+		}
+		break;
+		case 3:
+		{
+			int push = inputInteger("\n\t\tEnter an integer element to push onto the heap: ");
+
+			numbers.push(push);
+		}
+		break;
+		case 4:
+		{
+			cout << "\n\t\tThe first element of the heap: " << numbers.front();
+		}
+		break;
+		case 5:
+		{
+			if (numbers.empty() == true)
+			{
+				cout << "ERROR: Push an integer element into the heap first.\n";
+			}
+			else
+			{
+				numbers.pop();
+				cout << "\n\t\tThe first element of the heap has been removed.";
+			}
+		}
+		break;
+		case 6:
+		{
+			if (numbers.empty() == true)
+			{
+				cout << "ERROR: Push an integer element into the heap first.\n";
+			}
+			else
+			{
+				cout << "\n\t\t" << numbers;
+			}
+		}
+		break;
 		case 0: return;
 		}
 		cout << "\n\n"; system("pause");
@@ -130,7 +231,6 @@ void Option1B()
 
 	return;
 }
-
 void Option2()
 {
 	do
@@ -201,3 +301,4 @@ void Option3()
 	return;
 
 }
+
