@@ -101,10 +101,10 @@ public:
 
     T front()
     {
-            if (empty())
+        if (empty())
                 return NULL;
             
-            return A[0];
+        return A[0];
     }
 
     void pop()
@@ -131,5 +131,6 @@ ostream& operator <<(ostream& out, const MinHeap<T>& obj)
 }
 
 #endif // !MINHEAP_H
+
 
 
