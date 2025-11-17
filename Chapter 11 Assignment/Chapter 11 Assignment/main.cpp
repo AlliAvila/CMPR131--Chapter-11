@@ -231,8 +231,129 @@ void Option1B()
 
 	return;
 }
+//Precondition: Receives input for two sets of MaxHeaps
+//Postcondition:Returns the intersect heap of the two MaxHeaps
+vector<int> intersectMaxHeap(MaxHeap<int> heap1, MaxHeap<int> heap2)
+{
+	vector<int> intersection;
+	// Check each element in heap1 to see if it exists in heap2
+	while (!heap1.empty())
+	{
+		int element = heap1.front();
+		if (heap2.find(element))
+		{
+			intersection.push_back(element);
+		}
+		heap1.pop();
+	}
+	// Create a max heap from the intersection vector
+	make_heap(intersection.begin(), intersection.end());
+	return intersection;
+}
+
+//Precondition:  Receives input for two sets of MinHeaps
+//Postcondition: Returns the intersect heap of the two MinHeaps
+vector<int> intersectMinHeap(MinHeap<int> heap1, MinHeap<int> heap2)
+{
+	vector<int> intersection;
+	// Check each element in heap1 to see if it exists in heap2
+	while (!heap1.empty())
+	{
+		int element = heap1.front();
+		if (heap2.find(element))
+		{
+			intersection.push_back(element);
+		}
+		heap1.pop();
+	}
+	// Create a min heap from the intersection vector
+	make_heap(intersection.begin(), intersection.end(), greater<int>()); //greater<int>() extracts the smallest element first
+	return intersection;
+}
+
+//Precondition: Receives input for two sets of MaxHeaps
+//Postcondition: Returns the merged heap of the two MaxHeaps
+vector<int> unionMaxHeap(MaxHeap<int> heap1, MaxHeap<int> heap2)
+{
+	vector<int> merged;
+	// Add elements from the first heap
+	while (!heap1.empty())
+	{
+		merged.push_back(heap1.front());
+		heap1.pop();
+	}
+	// Add elements from the second heap
+	while (!heap2.empty())
+	{
+		merged.push_back(heap2.front());
+		heap2.pop();
+	}
+	// Create a max heap from the merged vector
+	make_heap(merged.begin(), merged.end());
+	return merged;
+}
+
+//Precondition: Receives input for two sets of MinHeaps
+//Postcondition: Returns the merged heap of the two MinHeaps
+vector<int> unionMinHeap(MinHeap<int> heap1, MinHeap<int> heap2)
+{
+	vector<int> merged;
+	// Add elements from the first heap
+	while (!heap1.empty())
+	{
+		merged.push_back(heap1.front());
+		heap1.pop();
+	}
+	// Add elements from the second heap
+	while (!heap2.empty())
+	{
+		merged.push_back(heap2.front());
+		heap2.pop();
+	}
+	// Create a min heap from the merged vector
+	make_heap(merged.begin(), merged.end(), greater<int>()); //greater<int>() extracts the smallest element first
+	return merged;
+}
+
+//Precondition: Receives a heap input 
+//Postcondition: Displays the contents of the inserted heap
+void displayHeap(const vector<int>& heap)
+{
+	for (const int& val : heap)
+	{
+		cout << val << " ";
+	}
+
+	cout << "\n\t\t";
+}
+
+//Precondition: Utilizes MaxHeap.h and MinHeap.h
+//Postcondition: Presents the Merged and Intersected Heaps of two min/max heaps
 void Option2()
 {
+	MaxHeap<int> max1;
+	max1.push(12);
+	max1.push(5);
+	max1.push(6);
+	max1.push(2);
+	MaxHeap<int> max2;
+	max2.push(12);
+	max2.push(9);
+	max2.push(6);
+	MinHeap<int> min1;
+	min1.push(2);
+	min1.push(5);
+	min1.push(6);
+	min1.push(12);
+	MinHeap<int> min2;
+	min2.push(12);
+	min2.push(9);
+	min2.push(6);
+	vector<int> mergedMax;
+	vector<int> intersectMax;
+	vector<int> mergedMin;
+	vector<int> intersectMin;
+
 	do
 	{
 		system("cls");
@@ -240,7 +361,7 @@ void Option2()
 		cout << "\n\t" << string(80, char(205));
 		cout << "\n\t\tA> Union two max Heaps";
 		cout << "\n\t\tB> Intersect two max Heaps";
-		cout << "\n\t\tC> Union two mmin Heaps";
+		cout << "\n\t\tC> Union two min Heaps";
 		cout << "\n\t\tD> Intersect two min Heaps";
 		cout << "\n\t" << string(80, char(196));
 		cout << "\n\t\t0> Exit";
@@ -248,11 +369,49 @@ void Option2()
 
 		switch (toupper(inputChar("\n\t\tOption: ", static_cast<string>("abcd0"))))
 		{
-		case 'A': break;
-		case 'B': break;
-		case 'C': break;
-		case 'D': break;
-		case 0: return;
+		case 'A':
+			cout << "\n\t\tMax Heap 1 : " << max1;
+		
+			cout << "\n\n\t\tMax Heap 2 : " << max2;
+
+			mergedMax = unionMaxHeap(max1,max2);
+
+			cout << "\n\n\t\tMerged max heap: ";
+			displayHeap(mergedMax);
+
+
+			break;
+		case 'B':
+			cout << "\n\t\tMax Heap 1 : " << max1;
+
+			cout << "\n\n\t\tMax Heap 2 : " << max2;
+
+			intersectMax = intersectMaxHeap(max1, max2);
+
+			cout << "\n\n\t\tIntersected max heap: ";
+			displayHeap(intersectMax);
+			break;
+		case 'C':
+			cout << "\n\t\t Min Heap 1: " << min1;
+			cout << "\n\n\t\t Min Heap 2: " << min2;
+
+			mergedMin = unionMinHeap(min1, min2);
+			
+			cout << "\n\n\t\tMerged min heap: ";
+			displayHeap(mergedMin);
+		
+
+			break;
+		case 'D':
+			cout << "\n\t\t Min Heap 1: " << min1;
+			cout << "\n\n\t\t Min Heap 2: " << min2;
+
+			intersectMin = intersectMinHeap(min1, min2);
+
+			cout << "\n\n\t\tIntersected min heap: ";
+			displayHeap(intersectMin);
+			break;
+		case '0': return;
 		}
 		cout << "\n\n"; system("pause");
 	} while (true);
@@ -301,4 +460,5 @@ void Option3()
 	return;
 
 }
+
 
