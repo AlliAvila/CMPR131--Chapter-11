@@ -7,6 +7,8 @@
 #include "MaxHeap.h"
 #include "MinHeap.h"
 #include <vector>
+#include <algorithm>
+
 using namespace std;
 
 void Option1();
@@ -14,6 +16,8 @@ void Option1A();
 void Option1B();
 void Option2();
 void Option3();
+void print(const vector<int>& vec);
+
 
 int main()
 {
@@ -262,6 +266,8 @@ void Option2()
 
 void Option3()
 {
+	vector<int>heaperJeepers;
+
 	do
 	{
 		system("cls");
@@ -283,17 +289,109 @@ void Option3()
 
 		switch (toupper(inputChar("\n\t\tOption: ", static_cast<string>("abcdefghij0"))))
 		{
-		case 'A': break;
-		case 'B': break;
-		case 'C': break;
-		case 'D': break;
-		case 'E': break;
-		case 'F': break;
-		case 'G': break;
-		case 'H': break;
-		case 'I': break;
-		case 'J': break;
-		case 0: return;
+		case 'A':
+		{
+			int size = inputInteger("\n\t\tEnter the size of the dynamic array: ");
+			heaperJeepers.resize(size);
+
+			for (int i = 0; i < heaperJeepers.size(); i++)
+			{
+				heaperJeepers[i] = rand() % 100 + 1;
+			}
+
+			cout << "\n\t\tDynamic array of size " << size << " created.";
+
+		}break;
+		case 'B':
+		{
+			int element = inputInteger("\n\t\tEnter an integer element to push_back() into the dynamic array: ");
+			heaperJeepers.push_back(element);
+			cout << "\n\t\tElement " << element << " pushed back into the dynamic array.";
+		}break;
+		case 'C':
+		{
+			make_heap(heaperJeepers.begin(), heaperJeepers.end());
+			cout << "\n\t\tThe dymaic array has been created into a heap ";
+		}break;
+		case 'D':
+		{
+			if (heaperJeepers.empty())
+				cout << "\n\t\tThe dynamic array is empty :( fill it up";
+			else
+				cout << "\n\t\tThe maximum element of heap: " << heaperJeepers.front();
+		}break;
+		case 'E':
+		{
+			if (is_heap(heaperJeepers.begin(), heaperJeepers.end()))
+			{
+				int element = inputInteger("\n\t\tEnter an integer element to into the heap: ",true);
+				heaperJeepers.push_back(element);
+				push_heap(heaperJeepers.begin(), heaperJeepers.end());
+				cout << "\n\t\tElement " << element << " pushed into the heap.";
+			}
+			else
+				cout << "\n\t\tERROR: The dynamic array is not a heap. Please create a heap first.";
+		}break;
+		case 'F':
+		{
+			if (is_heap(heaperJeepers.begin(), heaperJeepers.end()))
+			{
+				cout << "\n\t\tCurrent heap: ";
+				print(heaperJeepers);
+
+				pop_heap(heaperJeepers.begin(), heaperJeepers.end());
+				cout << "\n\t\tAfter calling pop_heap(): ";
+				print(heaperJeepers);
+
+				heaperJeepers.pop_back();
+				cout << "\n\t\tRemoving the head element: ";
+				print(heaperJeepers);
+			}
+			else
+				cout << "\n\t\tERROR: The dynamic array is not a heap. Please create a heap first.";
+		}break;
+		case 'G':
+		{
+			if (is_heap(heaperJeepers.begin(), heaperJeepers.end()))
+			{
+				cout << "\n\t\tBefore the sorted heap: ";
+				print(heaperJeepers);
+
+				sort_heap(heaperJeepers.begin(), heaperJeepers.end());
+				cout << "\n\t\tSorted heap: ";
+				print(heaperJeepers);
+			}
+			else
+				cout << "\n\t\tERROR: The dynamic array is not a heap. Please create a heap first.";
+		}break;
+		case 'H':
+		{
+			if (is_heap(heaperJeepers.begin(), heaperJeepers.end()))
+			{
+				cout << "\n\t\tThe dynamic array is a heap :D";
+			}
+			else
+				cout << "\n\t\tThe dynamic array is not a heap :( .";
+
+		}break;
+		case 'I':
+		{
+			cout << "\n\t\tThe heap elements in container are: ";
+			auto heapEnd = is_heap_until(heaperJeepers.begin(), heaperJeepers.end());
+
+			for (auto i = heaperJeepers.begin(); i != heapEnd; i++)
+				cout << *i << " ";
+
+
+		}break;
+		case 'J':
+		{
+			if (heaperJeepers.empty())
+				cout << "\n\t\tThe dynamic array is empty :( fill it up";
+			else
+				cout << "\n\t\tElements: "; print(heaperJeepers);
+		}break;
+		case '0': return;
 		}
 		cout << "\n\n"; system("pause");
 	} while (true);
@@ -302,3 +400,8 @@ void Option3()
 
 }
 
+void print(const vector<int>& vec)
+{
+	for (int element : vec)
+		cout << element << " ";
+}
